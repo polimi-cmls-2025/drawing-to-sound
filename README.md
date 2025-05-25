@@ -55,8 +55,7 @@ Controls
 - Position: Controls sound frequency and panning
 - C: Open color picker
 - H: Show help menu
-- Z: Clear canvas and stop all sounds
-- Esc: Stop all sounds
+- Z: Clear canvas
 
 Shape Detection
 --------------

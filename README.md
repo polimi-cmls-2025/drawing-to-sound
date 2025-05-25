@@ -90,6 +90,6 @@ If you encounter connection errors:
 Project Structure
 ----------------
 - main.py: Python application with GUI and drawing functionality
-- main.scd: SuperCollider code for sound synthesis
+- try.scd: SuperCollider code for sound synthesis
 - ShimmerEffectPlugin.vst3: VST plugin for audio effects
 - processingFinal.pde: processing code for visualisation

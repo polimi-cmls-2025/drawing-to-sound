@@ -48,11 +48,11 @@ SynthDef(\juce_effects, { |in, out|
 }).add;
 
 SynthDef(\shapeSound, { |freq=440, amp=0.1, pan=0, waveType=0, sustain=1,
-    doFM=0, doAM=0, greenVal=0, blueVal=0, out=0|
+    doFM=0, doAM=0, greenVal=0, blueVal=0, out=0, redVal=0|
 
     var envSoft, envSharp, env, sig, mod, ampMod;
     var attackTime, releaseTime, sustainTime;
-    var greenFactor, modFreq, modDepth, amFreq;
+    var greenFactor, modFreq, modDepth, amFreq, redFactor;
 
     greenFactor = greenVal.clip(~greenThresh, 1).linlin(~greenThresh, 1, 0.2, 0.5);
     attackTime = sustain * greenFactor;
@@ -65,8 +65,11 @@ SynthDef(\shapeSound, { |freq=440, amp=0.1, pan=0, waveType=0, sustain=1,
     env = Select.kr((greenVal > ~greenThresh).asInteger, [envSharp, envSoft]);
 
     // FM Modulation (Red)
-    modFreq = Select.kr((waveType == 3).asInteger, [freq * 3, freq * 0.05]);
-    modDepth = Select.kr((waveType == 3).asInteger, [freq * 3, freq * 0.005]);
+	redFactor = redVal.clip(~redThresh, 1).linlin(~redThresh, 1, 1, 31);
+	modFreq = redFactor;
+	modDepth = redFactor;
+    modFreq = Select.kr((waveType == 3).asInteger, [freq * 0.05, freq * 0.05]);
+    modDepth = Select.kr((waveType == 3).asInteger, [freq * 0.005, freq * 0.005]);
     mod = SinOsc.ar(modFreq, 0, modDepth) * doFM;
 
     // Oscillator
